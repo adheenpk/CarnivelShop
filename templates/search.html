@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<!--
+Template Name: Sislaf
+Author: <a href="https://www.os-templates.com/">OS Templates</a>
+Author URI: https://www.os-templates.com/
+Copyright: OS-Templates.com
+Licence: Free to use under our free template licence terms
+Licence URI: https://www.os-templates.com/template-terms
+-->
+<html lang="">
+<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<head>
+<title>Carnivel Shoping</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="{% static 'assets/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+<style>
+  .bg-banner{
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+  }
+  .custom-img {
+    width: 100%;
+    max-width: 500px;
+    height: 300px; /* Force uniform height */
+    object-fit: cover; /* Ensures it fills the space */
+}
+/* Flexbox Grid */
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Ensures even spacing */
+    gap: 20px; /* Adds space between items */
+    padding: 10px;
+}
+
+/* Each Grid Item */
+.grid-item {
+    width: calc(33.33% - 20px); /* 3 items per row */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Product Images */
+.custom-img {
+    width: 100%;
+    height: 250px; /* Set uniform height */
+    object-fit: cover;
+    border-radius: 8px; /* Optional: rounded corners */
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .grid-item {
+        width: calc(50% - 20px); /* 2 items per row on tablets */
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-item {
+        width: 100%; /* 1 item per row on mobile */
+    }
+}
+.category {
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+  padding: 10px 20px;
+  border-radius: 5px; /* Smooth corners */
+  position: absolute;
+  bottom: 160px; /* Position near bottom */
+  margin-bottom:120px
+  left: 10px; /* Position near left */
+  text-align: left; /* Align text properly */
+}
+/* Ensure product grid doesn't overlap */
+.product-grid {
+  margin-top: 250px;
+  z-index: 10;
+  position: relative;
+  
+}
+
+
+
+</style>
+</head>
+<body id="top">
+  <main class="hoc container clear">
+    <!-- main body -->
+    <!-- ################################################################################################ -->
+    <section id="introblocks">
+      <ul class="product-grid">
+
+       {% for i in pr %}  
+        <li class="grid-item">
+          <figure><a class="imgover" href={{i.get_url}}>
+            <img src="{{ i.img.url }}" alt=""   class="custom-img"></a>
+            <figcaption>
+              <h6 class="heading">{{i.name}}</h6>
+              <p>{{ i.desc|truncatewords:10 }}</p> 
+              <p>Price: <strong>${{ i.price }}</strong></p>
+              <br>
+              <p>Stock left: {{i.stock}}</p>
+
+            </figcaption>
+          </figure>
+        </li>
+
+     {% endfor %} 
+      </ul>
+    </section>
+    <!-- ################################################################################################ -->
+    <hr class="btmspace-80">
+    <!-- ################################################################################################ -->
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+{% comment %} <div class="bgded overlay" style="background-image: url('{% static "images/demo/backgrounds/02.png" %}');"> {% endcomment %}
+
+</div>
+
+{% comment %} <div class="bgded overlay row4" style="background-image:url('{%static "assets/images/demo/backgrounds/05.png" %}');"> {% endcomment %}
+  
+</div>
+
+<!-- JAVASCRIPTS -->
+<script src="{%static 'assets/layout/scripts/jquery.min.js' %}"></script>
+<script src="{%static 'assets/layout/scripts/jquery.backtotop.js' %}"></script>
+<script src="{%static 'assets/layout/scripts/jquery.mobilemenu.js' %}"></script>
+</body>
+</html>
+{% endblock %}

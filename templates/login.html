@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Carnivel Shopping</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="{% static 'assets/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <style>
+        .application {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 40px;
+            width: 400px;
+            margin: 150px auto 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top:111px; 
+        }
+        .application h1 {
+            text-align: center;
+            color: #FBAB45;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #333;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #FBAB45;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #E09E3E;
+        }
+    </style>
+</head>
+<body>
+    <div class="application">
+        <h1>Login</h1>
+        {% if messages %}
+          {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

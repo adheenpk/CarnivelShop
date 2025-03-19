@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Carnivel Shoping</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="{% static 'assets/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <style>
+        #header {
+            background: rgba(255, 255, 255, 0.2) !important; /* Slight blur effect */
+            backdrop-filter: blur(10px); /* Apply blur effect */
+            position: absolute;
+            width: 100v;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 5%;
+            padding-right: 100%;
+        }
+        #logo {
+            margin-left: -50px; 
+        }
+        #logo img {
+            max-width: 125px;
+            height: auto;
+            padding-left: 50px;
+        }
+        #mainav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        #mainav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #mainav ul li {
+            margin: 0 20px;
+        }
+        #mainav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+/* Ensure dropdown menu items appear vertically */
+#mainav ul ul {
+    display: block;  /* Ensures items are stacked vertically */
+    width: 180px;
+}
+
+#mainav ul ul li {
+    display: block; /* Forces each list item onto a new line */
+    width: 100%;
+}
+
+/* Ensure the product list appears in a vertical column */
+.product-list {
+    display: flex;
+    flex-direction: column;  /* Stacks products vertically */
+    gap: 10px;  /* Adds space between products */
+}
+
+.product-item {
+    display: block;  /* Ensures each product takes full width */
+    width: 100%;
+}
+
+/* Fix alignment of cart icon and text */
+#mainav li a {
+    display: flex !important; /* Ensure flexbox is applied */
+    align-items: center !important; /* Align items in a row */
+    justify-content: center; /* Ensures even spacing */
+    gap: 8px; /* Space between icon and text */
+    padding: 15px !important; /* Adjust padding for proper alignment */
+
+}
+
+/* Ensure the cart icon and text stay aligned */
+.cart-icon {
+    font-size: 16px; /* Adjust icon size */
+}
+
+.cart-text {
+    font-size: 14px;
+    white-space: nowrap; /* Prevents text from breaking into a new line */
+}
+/* Position the cart icon properly */
+.cart-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Allows absolute positioning of badge */
+    gap: 8px;
+}
+
+/* Cart Icon */
+.cart-icon {
+    font-size: 20px;
+    position: relative;
+}
+
+/* Red badge (cart count) */
+.cart-badge {
+    position: absolute;
+    top: -1px; /* Moves badge up */
+    left: 0px; /* Moves badge left */
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 18px; /* Ensures text stays centered */
+}
+.user-info {
+    margin-top: 15px;
+    margin-left:30px;
+    color:#fff;
+    cursor: pointer; /* Pointer on hover */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Hover Effect */
+.user-info:hover {
+    color:#FBAB45;/* Change to your preferred hover color */
+
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="wrapper row1">
+        <header id="header" class="hoc clear">
+            <div id="logo" class="fl_left">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'assets/images/logo.png' %}" alt="Carnivel logo">
+                </a>
+            </div>
+            <nav id="mainav" class="fl_right">
+                <ul class="clear">
+                    <li class="active"><a href="{% url 'home' %}">Home</a></li>
+                </ul>
+
+
+                <ul class="clear">
+                    <li><a class="dropdown" href="#">Category</a>
+                        <ul>
+                            <li><a href="{% url 'home' %}">All Products</a></li>
+                            {% for category in ct %}
+                                <li><a href="{{ category.get_url }}">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="cart-link" href="{% url 'cartDetails' %}">
+                            <span class="cart-badge">{{ itc }}</span> <!-- Red circle badge -->
+                            <i class="fa fa-shopping-cart cart-icon"></i>
+                            <span class="cart-text">Cart</span>
+                        </a>
+                    </li>
+                  
+                    {% if user.is_authenticated %}
+                    <li><a class="active" href="{% url 'logout' %}">Logout</a></li>
+                    <div class="user-info">
+                        <strong>{{ user.username }}</strong>
+                      </div>
+                    {% else %}
+                    <li><a class="active" href="{% url 'register' %}">Register</a></li>
+                    <li><a class="active" href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                
+                   
+                </ul>
+
+
+     
+            </nav>
+        </header>
+    </div>
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

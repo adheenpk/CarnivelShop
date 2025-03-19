@@ -1,0 +1,55 @@
+{% extends "nav_bar.html" %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" />
+    <link href="{% static 'assets/fontawesome/css/all.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/templatemo-comparto.css' %}" rel="stylesheet" />
+    <title>Comparto HTML CSS Template</title>
+<!--
+
+Comparto TemplateMo
+
+https://templatemo.com/tm-544-comparto
+
+-->
+<style>
+    .tm-mb-1 {
+        margin-top: 58px; /* Adjust as needed */
+    }
+</style>
+
+</head>
+
+<body>
+    <!-- Back to top button -->
+    <br></br>
+        <section class="tm-mb-1" id="about">
+            <div class="tm-row tm-about-row">
+                <div class="tm-section-1-l">
+                    <img src="{{pr.img.url}}" alt="About image" class="tm-img-responsive">
+                </div>
+                <article class="tm-section-1-r tm-bg-color-8">
+                    <h2 class="tm-mb-2 tm-title-color">{{pr.name}}</h2>
+                    <p>Price: ${{pr.price}} <br> {{pr.desc}}</p>
+                    <p>Avaliable Stock: {{pr.stock}}</p>
+                    {% if pr.stock <= 0 %}
+                    <p style="color:#d13c36">No Stock Avaliable </p>
+                    {% else %}
+                    <a href="{% url 'addcart' pr.id %}" class="tm-btn tm-btn-1 tm-link-to-services">Add to Cart</a>
+                    {% endif %}
+                   
+                </article>
+            </div>
+        </section>
+      
+</body>
+</html>
+{% endblock %}

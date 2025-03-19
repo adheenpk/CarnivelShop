@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Carnivel Shopping</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="{% static 'assets/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <style>
+        .application {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 40px;
+            width: 400px;
+            margin: 150px auto 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top:111px; 
+        }
+        .application h1 {
+            text-align: center;
+            color: #FBAB45;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #333;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #FBAB45;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #E09E3E;
+        }
+    </style>
+</head>
+<body>
+    <div class="application">
+        <h1>Registration</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+            
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+            
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+            
+            <label for="password1">Password:</label>
+            <input type="password" id="password1" name="password1" placeholder="Enter your password" required>
+            
+            <label for="password2">Re-type Password:</label>
+            <input type="password" id="password2" name="password2" placeholder="Re-enter your password" required>
+            
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Carnivel Shoping</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="{% static 'assets/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <style>
+        #header {
+            background: rgba(255, 255, 255, 0.2) !important; /* Slight blur effect */
+            backdrop-filter: blur(10px); /* Apply blur effect */
+            position: absolute;
+            width: 100v;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 5%;
+            padding-right: 100%;
+        }
+        #logo {
+            margin-left: -50px; 
+        }
+        #logo img {
+            max-width: 125px;
+            height: auto;
+            padding-left: 50px;
+        }
+        #mainav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        #mainav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #mainav ul li {
+            margin: 0 20px;
+        }
+        #mainav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+       
+
+    </style>
+</head>
+<body>
+    <div class="wrapper row0">
+        <div id="topbar" class="hoc clear">
+          <div class="fl_right">
+            <!-- ################################################################################################ -->
+            <ul class="nospace">
+              <li id="searchform">
+                <div>
+                  <form action="#" method="post">
+                    <fieldset>
+                      <legend>Quick Search:</legend>
+                      <input type="text" placeholder="Enter search term&hellip;">
+                      <button type="submit"><i class="fas fa-search"></i></button>
+                    </fieldset>
+                  </form>
+                </div>
+              </li>
+            </ul>
+            <!-- ################################################################################################ -->
+          </div>
+        </div>
+      </div>
+    <div class="wrapper row1">
+        <header id="header" class="hoc clear">
+            <div id="logo" class="fl_left">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'assets/images/logo.png' %}" alt="Carnivel logo">
+                </a>
+            </div>
+            <nav id="mainav" class="fl_right">
+                <ul class="clear">
+                    <li class="active"><a href="{% url 'home' %}">Home</a></li>
+                    <li><a class="drop" href="#">Pages</a></li>
+                </ul>     
+            </nav>
+        </header>
+    </div>
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

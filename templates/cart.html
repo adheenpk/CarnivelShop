@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <style>
+        .shopping-cart.dark {
+            background-color: rgb(28, 29, 33)
+        }
+        .shopping-cart .block-heading h1,
+        .shopping-cart .block-heading h2,
+        .shopping-cart .block-heading h3 {
+            margin-bottom: 1.2rem;
+            color:#fff;
+        }
+        .shopping-cart .items .product .info .price {
+            font-weight: bold;
+            font-size: 22px;
+            top: -15px; 
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <section class="shopping-cart dark">
+            <div class="container">
+                <div class="block-heading">
+                    <h2>Shopping Cart</h2>
+                    <p style="color: #fff;">"Your favorite products, just a click away! Fast, easy, and hassle-free shopping.Shop now and save big!"</p>
+                </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-8">
+                            <div class="items">
+                                {% for i in ci %}
+                                <div class="product">
+                                    <div class="row d-flex align-items-center"> 
+                                        <div class="col-md-3">
+                                            <a href="{{ i.prodt.get_url }}">
+                                                <img class="img-fluid mx-auto d-block image" src="{{ i.prodt.img.url }}" alt="{{ i.prodt.name }}" style="height:90px;width:90px">
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="col-md-8">
+                                            <div class="info">
+                                                <div class="row">
+                                                    <div class="col-md-5 product-name">
+                                                        <div class="product-name">
+                                                            <a href="{{i.prodt.get_url}}">{{ i.prodt.name }}</a><br>
+                                                            <span>ID : {{ i.prodt.id }}</span><br><br>
+                                                            <p>$ {{ i.prodt.price }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 d-flex flex-column align-items-center">
+                                                        <div class="d-flex align-items-center">
+                                                            <!-- Increment Button (+) -->
+                                                            <a href="{% url 'addcart' i.prodt.id %}" class="btn btn-sm btn-primary" 
+                                                               style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; color:black;">+</a>
+                                                    
+                                                            <!-- Quantity Input (Centered) -->
+                                                            <input id="quantity-{{ i.prodt.id }}" value="{{ i.quan }}" 
+                                                                   class="form-control text-center mx-2 quantity-input" readonly 
+                                                                   style="width: 50px; text-align: center;">
+                                                    
+                                                            <!-- Decrement Button (-) -->
+                                                            <a href="{% url 'cart_decrement' i.prodt.id %}" class="btn btn-sm btn-danger" 
+                                                               style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; color:black;">-</a>
+                                                        </div>
+                                                    
+                                                        <!-- Delete Button  -->
+                                                        <a href="{% url 'remove' i.prodt.id %}" class="btn btn-sm btn-outline-danger mt-2">
+                                                            🗑️ Remove
+                                                        </a>
+                                                    </div>
+                                                                                                   
+                                                    <div class="col-md-3 price">
+                                                        <span>$ {{ i.total }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                {% endfor %}
+                                <div class="container mt-4">
+                                    <h4>Cart Summary</h4>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>Total Items</th>
+                                            <td>{{ co }}</td>  <!-- Display total quantity -->
+                                        </tr>
+                                        <tr>
+                                            <th>Total Price</th>
+                                            <td>${{ t }}</td>  <!-- Display total price -->
+                                        </tr>
+                                    </table>
+                                
+                                    <!-- Checkout Button -->
+                                    <a href=# class="btn btn-success" style="color: black;">Proceed to Pay</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+{% endblock %}
